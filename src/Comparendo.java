@@ -1,11 +1,11 @@
 public class Comparendo {
 
-    protected Carro carro;
-    protected Camion camion;
-    protected Mula mula;
+    protected Vehiculo carro;
+    protected Vehiculo camion;
+    protected Vehiculo mula;
 
     // Constructor completo
-    public Comparendo(Carro carro, Camion camion, Mula mula) {
+    public Comparendo(Vehiculo carro, Vehiculo camion, Vehiculo mula) {
         this.carro = carro;
         this.camion = camion;
         this.mula = mula;
@@ -67,20 +67,20 @@ public class Comparendo {
     public String enviarCorreoFotomulta(String tipoVehiculo) {
 
         if(tipoVehiculo == "CAMION") {
-            String cuerpoMensaje = "//enviando correo para el tipo camion.";
-            String asunto = "//asunto: comparendo camion";
-            return   asunto + cuerpoMensaje;
+            return notificacionFotomulta(tipoVehiculo);
         }else if(tipoVehiculo == "CARRO") {
-            String cuerpoMensaje = "//enviando correo para el tipo carro.";
-            String asunto = "//asunto: comparendo carro";
-            return   asunto + cuerpoMensaje;
+            return notificacionFotomulta(tipoVehiculo);
         }else if(tipoVehiculo == "MULA") {
-            String cuerpoMensaje = "//enviando correo para el tipo mula.";
-            String asunto = "//asunto: comparendo mula";
-            return   asunto + cuerpoMensaje;
+            return notificacionFotomulta(tipoVehiculo);
         } else {
             return "enviando correo con vehiculo desconocido";
         }
+    }
+
+    private static String notificacionFotomulta(String tipoVehiculo) {
+        String cuerpoMensaje = "//enviando correo para el tipo " + tipoVehiculo;
+        String asunto = "//asunto: comparendo " + tipoVehiculo;
+        return asunto + cuerpoMensaje;
     }
 
 }

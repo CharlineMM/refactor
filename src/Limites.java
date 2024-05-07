@@ -1,7 +1,7 @@
 public class Limites {
-    protected int limiteInferior = 0;
-    protected int limiteInferiorIntermedio = 0;
-    protected int limiteSuperior = 0;
+    protected int limiteInferior;
+    protected int limiteInferiorIntermedio;
+    protected int limiteSuperior;
 
     public Limites(int limiteInferior, int limiteInferiorIntermedio, int limiteSuperior) {
         this.limiteInferior = limiteInferior;
