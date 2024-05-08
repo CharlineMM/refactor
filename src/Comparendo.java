@@ -1,43 +1,24 @@
 public class Comparendo {
 
-    private int limiteInferiorCarro = 65;
-    private int limiteInferiorIntermedioCarro = 66;
-    private int limiteSuperiorCarro = 85;
-    private int limiteInferiorCamion = 75;
-    private int limiteInferiorIntermedioCamion = 76;
-    private int limiteSuperiorCamion = 95;
-    private int limiteInferiorMula = 95;
-    private int limiteInferiorIntermedioMula = 96;
-    private int limiteSuperiorMula = 110;
+    protected Vehiculo carro;
+    protected Vehiculo camion;
+    protected Vehiculo mula;
 
-    public Comparendo(int limiteInferiorCarro,
-                      int limiteInferiorIntermedioCarro,
-                      int limiteSuperiorCarro,
-                      int limiteInferiorCamion,
-                      int limiteInferiorIntermedioCamion,
-                      int limiteSuperiorCamion,
-                      int limiteInferiorMula,
-                      int limiteInferiorIntermedioMula,
-                      int limiteSuperiorMula) {
-
-        this.limiteInferiorCarro = limiteInferiorCarro;
-        this.limiteInferiorIntermedioCarro = limiteInferiorIntermedioCarro;
-        this.limiteSuperiorCarro = limiteSuperiorCarro;
-        this.limiteInferiorCamion = limiteInferiorCamion;
-        this.limiteInferiorIntermedioCamion = limiteInferiorIntermedioCamion;
-        this.limiteSuperiorCamion = limiteSuperiorCamion;
-        this.limiteInferiorMula = limiteInferiorMula;
-        this.limiteInferiorIntermedioMula = limiteInferiorIntermedioMula;
-        this.limiteSuperiorMula = limiteSuperiorMula;
+    // Constructor completo
+    public Comparendo(Vehiculo carro, Vehiculo camion, Vehiculo mula) {
+        this.carro = carro;
+        this.camion = camion;
+        this.mula = mula;
     }
 
-    public Comparendo(int limiteInferiorCarro) {
+    // Que sentido tiene este constructor?
+    /*public Comparendo(int limiteInferiorCarro) {
         this.limiteInferiorCarro = limiteInferiorCarro;
-    }
+    }*/
 
+    // Constructor vacio
     public Comparendo() {
     }
-
 
     public void construirFotoMulta(int velocidad, String tipoVehiculo) {
         int cpa = calcularComparendo(velocidad, tipoVehiculo);
@@ -53,27 +34,27 @@ public class Comparendo {
     public int calcularComparendo(int ve, String tp) {
 
         if(tp == "CARRO") {
-            if(ve<=limiteInferiorCarro) {
+            if(ve<=carro.limiteInferior) {
                 return 0;
-            }else if (ve >=limiteInferiorIntermedioCarro && ve<=limiteSuperiorCarro) {
+            }else if (ve >=carro.limiteInferiorIntermedio && ve<=carro.limiteSuperior) {
                 return 1;
             }
             return 2;
         }
 
         if(tp == "CAMION") {
-            if(ve<=limiteInferiorCamion) {
+            if(ve<=camion.limiteInferior) {
                 return 0;
-            }else if (ve >=limiteInferiorIntermedioCamion && ve<=limiteSuperiorCamion) {
+            }else if (ve >=camion.limiteInferiorIntermedio && ve<=camion.limiteSuperior) {
                 return 1;
             }
             return 2;
         }
 
         if(tp == "MULA") {
-            if(ve<=limiteInferiorMula) {
+            if(ve<=mula.limiteInferior) {
                 return 0;
-            }else if (ve >=limiteInferiorIntermedioMula && ve<=limiteSuperiorMula) {
+            }else if (ve >=mula.limiteInferiorIntermedio && ve<=mula.limiteSuperior) {
                 return 1;
             }
             return 2;
@@ -86,20 +67,20 @@ public class Comparendo {
     public String enviarCorreoFotomulta(String tipoVehiculo) {
 
         if(tipoVehiculo == "CAMION") {
-            String cuerpoMensaje = "//enviando correo para el tipo camion.";
-            String asunto = "//asunto: comparendo camion";
-            return   asunto + cuerpoMensaje;
+            return notificacionFotomulta(tipoVehiculo);
         }else if(tipoVehiculo == "CARRO") {
-            String cuerpoMensaje = "//enviando correo para el tipo carro.";
-            String asunto = "//asunto: comparendo carro";
-            return   asunto + cuerpoMensaje;
+            return notificacionFotomulta(tipoVehiculo);
         }else if(tipoVehiculo == "MULA") {
-            String cuerpoMensaje = "//enviando correo para el tipo mula.";
-            String asunto = "//asunto: comparendo mula";
-            return   asunto + cuerpoMensaje;
+            return notificacionFotomulta(tipoVehiculo);
         } else {
             return "enviando correo con vehiculo desconocido";
         }
+    }
+
+    private static String notificacionFotomulta(String tipoVehiculo) {
+        String cuerpoMensaje = "//enviando correo para el tipo " + tipoVehiculo;
+        String asunto = "//asunto: comparendo " + tipoVehiculo;
+        return asunto + cuerpoMensaje;
     }
 
 }
